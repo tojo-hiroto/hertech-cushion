@@ -4,362 +4,233 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#fff6f0">
-<title>あなたにぴったりの無料イベント｜HerTech</title>
+<meta name="theme-color" content="#FBF7F2">
+<title>無料イベントのご案内｜HerTech</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Yomogi&display=swap" rel="stylesheet">
 <style>
+  /* HerTechブランドカラー：プライマリー #DFA882 / #FFFFFF、セカンダリー #385F7F */
   :root {
-    --orange: #ff7a2e;
-    --orange-2: #ffa66b;
-    --blue: #2f7df6;
-    --blue-2: #7cb8ff;
-    --navy: #13233d;
-    --sub: #6b7891;
-    --glass: rgba(255, 255, 255, .62);
-    --glass-strong: rgba(255, 255, 255, .82);
-    --glass-line: rgba(255, 255, 255, .9);
-    --grad: linear-gradient(120deg, #ff7a2e 0%, #ff9a5c 40%, #5fa2ff 100%);
-    --ease-out: cubic-bezier(.2, .8, .2, 1);
-    --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+    --peach: #DFA882;
+    --peach-dark: #B97F57;   /* 文字で使う時の濃いめ */
+    --peach-tint: #FBEFE5;
+    --navy: #385F7F;
+    --ink: #24394C;          /* 本文 */
+    --sub: #6E7F8E;
+    --paper: #FBF7F2;        /* 生成り */
+    --line: #E7DDD2;
+    --sky: #6AAAD9;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { min-height: 100%; }
   body {
-    font-family: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
-    color: var(--navy);
-    background: #fff8f3;
+    font-family: "Zen Kaku Gothic New", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+    color: var(--ink);
+    background: var(--paper);
     -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: transparent;
     overflow-x: hidden;
   }
-  button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+  button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; text-align: left; }
+  .hand { font-family: "Yomogi", "Zen Kaku Gothic New", sans-serif; font-weight: 400; }
 
-  /* ================= 背景：ゆっくり動くグラデーションの光 + 粒子感 ================= */
-  .bg { position: fixed; inset: 0; z-index: -2; overflow: hidden; background: linear-gradient(180deg, #fff7f1 0%, #f6f9ff 55%, #fff4ec 100%); }
-  .blob { position: absolute; border-radius: 50%; filter: blur(48px); opacity: .85; will-change: transform; }
-  .blob.b1 { width: 420px; height: 420px; left: -170px; top: -150px; background: radial-gradient(circle at 40% 40%, #8ec6ff, #bfe0ff 60%, transparent 72%); animation: drift1 16s ease-in-out infinite alternate; }
-  .blob.b2 { width: 460px; height: 460px; right: -200px; top: -170px; background: radial-gradient(circle at 50% 50%, #ff9a5a, #ffc8a3 60%, transparent 72%); animation: drift2 18s ease-in-out infinite alternate; }
-  .blob.b3 { width: 440px; height: 440px; left: -200px; bottom: -200px; background: radial-gradient(circle at 50% 50%, #6fb4ff, #c4e1ff 60%, transparent 72%); animation: drift2 20s ease-in-out infinite alternate-reverse; }
-  .blob.b4 { width: 420px; height: 420px; right: -180px; bottom: -190px; background: radial-gradient(circle at 50% 50%, #ffa06a, #ffd3b6 60%, transparent 72%); animation: drift1 17s ease-in-out infinite alternate-reverse; }
-  @keyframes drift1 { to { transform: translate(40px, 50px) scale(1.08); } }
-  @keyframes drift2 { to { transform: translate(-50px, 30px) scale(1.12); } }
-  .grain {
-    position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .18; mix-blend-mode: soft-light;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
+  /* 背景：右上にだけ、ブランドのピーチの面を静かに置く */
+  .deco { position: fixed; z-index: -1; pointer-events: none; }
+  .deco.d1 { top: -120px; right: -140px; width: 300px; height: 300px; border-radius: 50%; background: var(--peach-tint); }
+  .deco.d2 { bottom: -60px; left: -50px; width: 140px; height: 140px; border-radius: 50%; border: 1.5px dashed #E9D6C5; }
 
   .wrap {
-    position: relative; max-width: 460px; margin: 0 auto; min-height: 100vh; min-height: 100svh;
-    padding: 28px 18px calc(28px + env(safe-area-inset-bottom));
-    display: flex; flex-direction: column;
+    max-width: 440px; margin: 0 auto; min-height: 100vh; min-height: 100svh;
+    padding: 26px 22px calc(32px + env(safe-area-inset-bottom));
   }
 
-  /* ================= 上部：進捗 ================= */
-  .progress {
-    display: flex; align-items: center; gap: 12px;
-    padding: 10px 14px; border-radius: 999px;
-    background: var(--glass); border: 1px solid var(--glass-line);
-    backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%);
-    box-shadow: 0 6px 20px rgba(19, 35, 61, .06);
-    margin: 0 auto 26px; width: 100%; max-width: 320px;
-  }
-  .progress .count { font-family: "Outfit", sans-serif; font-weight: 700; font-size: 13px; letter-spacing: .08em; color: var(--orange); white-space: nowrap; }
-  .progress .count b { font-size: 17px; }
-  .progress .track { display: block; flex: 1; height: 6px; border-radius: 3px; background: rgba(19, 35, 61, .08); overflow: hidden; }
-  .progress .fill { display: block; height: 100%; width: 8%; border-radius: 3px; background: var(--grad); transition: width .6s var(--ease-out); }
-  .progress .goal { font-size: 11px; font-weight: 700; color: var(--sub); white-space: nowrap; }
+  /* 上部：質問番号 */
+  .q { display: flex; align-items: center; gap: 10px; margin-bottom: 30px; }
+  .q .num { font-size: 13px; font-weight: 700; letter-spacing: .12em; color: var(--navy); }
+  .q .bars { display: flex; gap: 4px; }
+  .q .bars i { display: block; width: 22px; height: 3px; border-radius: 2px; background: var(--line); transition: background .3s ease; }
+  .q .bars i.on { background: var(--peach); }
 
-  /* ================= ステージ（ステップ切替のスライド） ================= */
-  .stage { position: relative; flex: 1; }
+  /* パネル切替（動き①：横スライド） */
   .panel { display: none; }
   .panel.show { display: block; }
-  .panel.in-right { animation: inRight .5s var(--ease-out) both; }
-  .panel.in-left { animation: inLeft .5s var(--ease-out) both; }
-  @keyframes inRight { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: none; } }
-  @keyframes inLeft { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: none; } }
+  .panel.in-right { animation: inRight .38s cubic-bezier(.2,.8,.2,1) both; }
+  .panel.in-left { animation: inLeft .38s cubic-bezier(.2,.8,.2,1) both; }
+  @keyframes inRight { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
+  @keyframes inLeft { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: none; } }
 
-  /* 順番に出てくる要素 */
-  .rise { opacity: 0; transform: translateY(16px); }
-  .panel.show .rise { animation: rise .6s var(--ease-out) forwards; animation-delay: calc(var(--i, 0) * 80ms + 80ms); }
-  @keyframes rise { to { opacity: 1; transform: none; } }
+  /* 見出し：左揃え・大小差 */
+  .head { position: relative; margin-bottom: 26px; }
+  .head h1 { font-size: 32px; font-weight: 900; line-height: 1.35; letter-spacing: .01em; color: var(--ink); }
+  .head h1 .u { position: relative; display: inline-block; }
+  .head h1 .u svg { position: absolute; left: -2px; bottom: -6px; width: calc(100% + 4px); height: 12px; }
+  .head p { margin-top: 12px; font-size: 14px; line-height: 1.8; color: var(--sub); font-weight: 500; }
+  .memo {
+    position: absolute; right: 4px; top: -4px;
+    font-size: 15px; color: var(--peach-dark); transform: rotate(6deg); line-height: 1.3; text-align: center;
+  }
+  .memo svg { display: block; width: 34px; height: 26px; margin: 2px 0 0 4px; }
 
-  /* ================= 見出し ================= */
-  .eyebrow {
-    display: flex; justify-content: center; margin-bottom: 14px;
+  /* ===== 選択肢カード ===== */
+  .fields, .ages { display: grid; gap: 14px; }
+  .ages { gap: 12px; }
+  .opt {
+    position: relative; display: flex; align-items: center; gap: 16px; width: 100%;
+    padding: 14px 16px 14px 14px; border-radius: 14px;
+    background: #fff; border: 1.5px solid var(--line);
+    box-shadow: 3px 3px 0 #EFE4D8;
+    transition: border-color .15s ease, background .15s ease, transform .15s ease, box-shadow .15s ease;
   }
-  .eyebrow span {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 6px 14px; border-radius: 999px;
-    font-size: 12.5px; font-weight: 700; color: #c2550f;
-    background: linear-gradient(90deg, rgba(255,122,46,.14), rgba(95,162,255,.14));
-    border: 1px solid rgba(255,122,46,.18);
-  }
-  .eyebrow svg { width: 14px; height: 14px; }
-  .title {
-    text-align: center; font-size: 29px; font-weight: 900; line-height: 1.45; letter-spacing: .02em;
-    margin-bottom: 26px;
-  }
-  .mark { position: relative; white-space: nowrap; z-index: 0; }
-  .mark::after {
-    content: ""; position: absolute; left: -4px; right: -4px; bottom: 4px; height: 12px; z-index: -1;
-    background: linear-gradient(90deg, rgba(255,154,92,.6), rgba(124,184,255,.6)); border-radius: 6px;
-    transform: scaleX(0); transform-origin: left;
-  }
-  .panel.show .mark::after { animation: markIn .7s var(--ease-out) .45s forwards; }
-  @keyframes markIn { to { transform: scaleX(1); } }
+  .opt:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #EFE4D8; }
+  .opt:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
+  /* 動き②：選んだときの反応 */
+  .opt.selected { border-color: var(--peach); background: #FFF9F4; box-shadow: 3px 3px 0 var(--peach); }
+  .opt .arrow { flex: none; margin-left: auto; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; border: 1.5px solid var(--line); color: var(--navy); transition: all .15s ease; }
+  .opt .arrow svg { width: 15px; height: 15px; }
+  .opt .arrow .ck { display: none; }
+  .opt.selected .arrow { background: var(--peach); border-color: var(--peach); color: #fff; }
+  .opt.selected .arrow .ar { display: none; }
+  .opt.selected .arrow .ck { display: block; }
 
-  /* ================= STEP1：分野カード（ガラス） ================= */
-  .fields { display: flex; flex-direction: column; gap: 16px; }
-  .card {
-    position: relative; width: 100%; text-align: left;
-    border-radius: 28px;
-    background: var(--glass-strong);
-    border: 1px solid var(--glass-line);
-    backdrop-filter: blur(18px) saturate(150%); -webkit-backdrop-filter: blur(18px) saturate(150%);
-    box-shadow: 0 14px 34px rgba(19, 35, 61, .08), inset 0 1px 0 rgba(255,255,255,.9);
-    transition: transform .25s var(--ease-out), box-shadow .25s ease;
-    overflow: hidden;
-  }
-  .card::before { /* 選択時のグラデ枠 */
-    content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 2px;
-    background: var(--grad);
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor; mask-composite: exclude;
-    opacity: 0; transition: opacity .2s ease; pointer-events: none;
-  }
-  .card:active { transform: scale(.975); }
-  .card.selected { transform: scale(1.02); box-shadow: 0 18px 40px rgba(255, 122, 46, .25); }
-  .card.selected::before { opacity: 1; }
-  .card.dim { opacity: .45; transform: scale(.97); }
-  .card:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+  .opt .t { min-width: 0; }
+  .opt .t b { display: block; font-size: 21px; font-weight: 900; letter-spacing: .01em; white-space: nowrap; }
+  .opt .t span { display: block; margin-top: 3px; font-size: 12px; color: var(--sub); font-weight: 500; }
 
-  .field { display: flex; align-items: center; gap: 16px; padding: 18px 18px 18px 16px; min-height: 124px; }
-  .field .ic {
-    flex: none; width: 86px; height: 86px; border-radius: 24px;
-    display: grid; place-items: center;
-    background: linear-gradient(145deg, #fff, #fff3ea 55%, #eaf3ff);
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,.9), 0 6px 14px rgba(19,35,61,.06);
-    transition: transform .4s var(--ease-spring);
-  }
-  .field .ic img { width: 78px; height: 78px; }
-  .card.selected .ic { transform: rotate(-6deg) scale(1.08); }
-  .field .txt { flex: 1; min-width: 0; }
-  .field .name { display: block; font-size: 25px; font-weight: 900; letter-spacing: .02em; white-space: nowrap; }
-  .field .desc { display: block; margin-top: 4px; font-size: 12.5px; font-weight: 500; color: var(--sub); }
-  .go {
-    flex: none; width: 36px; height: 36px; border-radius: 50%;
-    display: grid; place-items: center;
-    background: linear-gradient(135deg, #eaf2ff, #fff); color: var(--blue);
-    box-shadow: inset 0 0 0 1px rgba(47,125,246,.15);
-    transition: background .2s ease, color .2s ease, transform .3s var(--ease-spring);
-  }
-  .go svg { width: 18px; height: 18px; }
-  .card.selected .go { background: var(--grad); color: #fff; transform: scale(1.1); }
-  .go .ck { display: none; }
-  .card.selected .go .ar { display: none; }
-  .card.selected .go .ck { display: block; }
+  /* ===== STEP1：制作物のミニ見本 ===== */
+  .thumb { position: relative; flex: none; width: 96px; height: 74px; border-radius: 8px; background: #F4EEE7; }
+  .thumb .clip { position: absolute; inset: 0; border-radius: 8px; overflow: hidden; }
+  .tape { position: absolute; z-index: 2; width: 44px; height: 14px; background: rgba(223,168,130,.5); top: -6px; left: 30px; transform: rotate(-7deg); }
 
-  /* カードを押したときの波紋 */
-  .ripple { position: absolute; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, rgba(255,154,92,.35), rgba(255,154,92,0) 70%); transform: scale(0); animation: ripple .6s ease-out forwards; }
-  @keyframes ripple { to { transform: scale(1); opacity: 0; } }
+  /* Webデザイン：ブラウザ枠＋サイト */
+  .site { position: absolute; inset: 9px 8px 8px; border-radius: 4px; background: #fff; box-shadow: 0 1px 2px rgba(36,57,76,.12); overflow: hidden; }
+  .site .bar { display: flex; height: 7px; background: #EEE6DD; gap: 2px; align-items: center; padding-left: 3px; }
+  .site .bar i { display: block; width: 3px; height: 3px; border-radius: 50%; background: #D3C4B5; }
+  .site .hero { display: block; height: 27px; margin: 4px; border-radius: 2px; background: linear-gradient(135deg, var(--peach), #EBC4A6); position: relative; }
+  .site .hero::after { content: ""; position: absolute; left: 5px; top: 7px; width: 34px; height: 4px; border-radius: 2px; background: rgba(255,255,255,.9); box-shadow: 0 7px 0 -1px rgba(255,255,255,.7); }
+  .site .cols { display: flex; gap: 3px; margin: 0 4px; }
+  .site .cols i { display: block; flex: 1; height: 13px; border-radius: 2px; background: #EAF2F8; }
+  .site .cols i:nth-child(2) { background: #F6EBE2; }
 
-  .note { margin-top: 18px; text-align: center; font-size: 12px; font-weight: 500; color: var(--sub); }
-  .note b { color: var(--navy); }
+  /* 動画編集：プレビュー＋タイムライン */
+  .edit { position: absolute; inset: 0; background: #2B3A48; padding: 6px; }
+  .edit .pv { display: block; height: 38px; border-radius: 3px; background: linear-gradient(160deg, #6A8BA6, #385F7F); position: relative; }
+  .edit .pv::after { content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-40%, -50%); border-left: 9px solid #fff; border-top: 6px solid transparent; border-bottom: 6px solid transparent; }
+  .edit .tl { display: grid; margin-top: 5px; gap: 3px; }
+  .edit .tl i { display: block; height: 6px; border-radius: 2px; }
+  .edit .tl i:nth-child(1) { width: 78%; background: var(--peach); }
+  .edit .tl i:nth-child(2) { width: 56%; margin-left: 14%; background: var(--sky); }
+  .edit .tl i:nth-child(3) { width: 88%; background: #8FA3B4; }
+  .edit .ph { position: absolute; top: 46px; bottom: 4px; left: 52%; width: 1.5px; background: #fff; }
 
-  /* ================= STEP2：年代（3列のイラストカード） ================= */
-  .chosen-row { display: flex; justify-content: center; margin-bottom: 14px; }
-  .chosen {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 7px 8px 7px 14px; border-radius: 999px;
-    background: var(--glass-strong); border: 1px solid var(--glass-line);
-    box-shadow: 0 6px 16px rgba(19,35,61,.06);
-    font-size: 13px; font-weight: 700;
-  }
-  .chosen .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--grad); }
-  .chosen .chg { padding: 3px 10px; border-radius: 999px; background: rgba(19,35,61,.06); font-size: 11.5px; color: var(--sub); }
+  .foot { margin-top: 22px; display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--sub); font-weight: 500; }
+  .foot .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--peach); }
 
-  .ages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-  .age { padding: 14px 6px 16px; text-align: center; border-radius: 24px; }
-  .age .av {
-    position: relative; width: 88px; height: 88px; margin: 0 auto 12px; border-radius: 50%;
-    box-shadow: 0 8px 18px rgba(19,35,61,.10), 0 0 0 4px rgba(255,255,255,.9);
-    transition: transform .45s var(--ease-spring);
-  }
-  .age .av img { width: 100%; height: 100%; border-radius: 50%; display: block; }
-  .age .av .badge {
-    position: absolute; right: -4px; bottom: -2px; width: 28px; height: 28px; border-radius: 50%;
-    display: grid; place-items: center; background: var(--grad); color: #fff;
-    box-shadow: 0 4px 10px rgba(255,122,46,.4);
-    transform: scale(0); transition: transform .35s var(--ease-spring);
-  }
-  .age .av .badge svg { width: 15px; height: 15px; }
-  .age.selected .av { transform: translateY(-4px) scale(1.06); }
-  .age.selected .badge { transform: scale(1); }
-  .age .lb { display: block; font-size: 21px; font-weight: 900; letter-spacing: .02em; white-space: nowrap; }
-  .age .lb small { font-size: 14px; }
-  .age .sm { display: block; margin-top: 6px; font-size: 11px; font-weight: 700; color: var(--blue); }
+  /* ===== STEP2：年代 ===== */
+  .picked { display: flex; align-items: center; gap: 6px; margin-bottom: 14px; font-size: 13px; color: var(--sub); font-weight: 500; }
+  .picked b { color: var(--navy); font-weight: 700; }
+  .picked button { color: var(--peach-dark); font-size: 12.5px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; padding: 4px 2px; margin-left: 4px; }
+  .age { padding: 12px 16px 12px 12px; gap: 14px; }
+  .age img { flex: none; width: 60px; height: 60px; border-radius: 50%; background: #F4EEE7; }
+  .age .t b { font-size: 22px; }
+  .age .t b small { font-size: 15px; font-weight: 700; margin-left: 1px; }
+  .age.selected .t span { color: var(--peach-dark); }
 
-  .floaty { animation: floaty 4s ease-in-out infinite; }
-  .age:nth-child(2) .floaty { animation-delay: -1.3s; }
-  .age:nth-child(3) .floaty { animation-delay: -2.6s; }
-  @keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
-
-  /* ================= マッチング演出（遷移直前） ================= */
-  .match {
-    position: fixed; inset: 0; z-index: 10; display: grid; place-items: center;
-    background: rgba(255, 248, 243, .55);
-    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    opacity: 0; pointer-events: none; transition: opacity .3s ease;
-  }
-  .match.on { opacity: 1; pointer-events: auto; }
-  .match .box { text-align: center; padding: 0 24px; transform: translateY(10px) scale(.96); transition: transform .5s var(--ease-spring); }
-  .match.on .box { transform: none; }
-  .match .ring { position: relative; width: 96px; height: 96px; margin: 0 auto 20px; }
-  .match .ring svg { width: 100%; height: 100%; }
-  .match .ring .arc { stroke-dasharray: 283; stroke-dashoffset: 283; }
-  .match.on .ring .arc { animation: draw .7s var(--ease-out) forwards; }
-  .match .ring .ck { stroke-dasharray: 60; stroke-dashoffset: 60; }
-  .match.on .ring .ck { animation: draw .35s var(--ease-out) .55s forwards; }
-  @keyframes draw { to { stroke-dashoffset: 0; } }
-  .match .h { font-size: 21px; font-weight: 900; line-height: 1.5; }
-  .match .tag {
-    display: inline-block; margin-top: 12px; padding: 6px 14px; border-radius: 999px;
-    background: var(--grad); color: #fff; font-size: 13px; font-weight: 700;
-    box-shadow: 0 6px 16px rgba(255,122,46,.3);
-  }
-  .match .s { margin-top: 12px; font-size: 12px; font-weight: 500; color: var(--sub); }
-  .confetti { position: fixed; inset: 0; pointer-events: none; z-index: 11; overflow: hidden; }
-  .confetti i {
-    position: absolute; top: 50%; left: 50%; width: 8px; height: 12px; border-radius: 2px;
-    opacity: 0; animation: burst 1s var(--ease-out) forwards;
-  }
-  @keyframes burst {
-    0% { opacity: 1; transform: translate(-50%, -50%) rotate(0); }
-    100% { opacity: 0; transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) rotate(var(--r)); }
-  }
-
-  @media (hover: hover) {
-    .card:hover { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(19,35,61,.12); }
-  }
+  @media (hover: hover) { .opt:hover { border-color: #D9C6B4; } }
   @media (max-width: 360px) {
-    .title { font-size: 25px; }
-    .field .name { font-size: 22px; }
-    .field .ic { width: 74px; height: 74px; } .field .ic img { width: 66px; height: 66px; }
-    .age .av { width: 74px; height: 74px; }
-    .age .lb { font-size: 18px; }
+    .head h1 { font-size: 27px; }
+    .thumb { width: 88px; height: 68px; }
+    .opt .t b { font-size: 19px; }
+    .memo { display: none; }
   }
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-  }
+  @media (prefers-reduced-motion: reduce) { .panel.in-right, .panel.in-left { animation: none; } }
 </style>
 </head>
 <body>
-
-<div class="bg" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div></div>
-<div class="grain" aria-hidden="true"></div>
+<div class="deco d1" aria-hidden="true"></div>
+<div class="deco d2" aria-hidden="true"></div>
 
 <main class="wrap">
 
-  <div class="progress" aria-hidden="true">
-    <span class="count">STEP <b id="stepNum">1</b>/2</span>
-    <span class="track"><span class="fill" id="fill"></span></span>
-    <span class="goal">無料イベントへ</span>
+  <div class="q" aria-hidden="true">
+    <span class="num" id="qnum">Q1 / 2</span>
+    <span class="bars"><i id="bar1" class="on"></i><i id="bar2"></i></span>
   </div>
 
-  <div class="stage">
-
-    <!-- ========== STEP1：興味分野 ========== -->
-    <section class="panel" id="step-field" aria-labelledby="t1">
-      <div class="eyebrow rise" style="--i:0"><span>
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.3L20.5 10l-6.3 2.2L12 18.5l-2.2-6.3L3.5 10l6.3-1.7z"/></svg>
-        2タップで、あなたに合う無料イベントをご案内</span>
+  <!-- ========== STEP1：分野 ========== -->
+  <section class="panel" id="step-field" aria-labelledby="t1">
+    <div class="head">
+      <div class="memo hand" aria-hidden="true">どっちも<br>無料だよ
+        <svg viewBox="0 0 34 26" fill="none" stroke="#DFA882" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M28 2c-2 10-9 17-21 19"/><path d="M12 15l-5 6 7 2"/></svg>
       </div>
-      <h1 class="title rise" style="--i:1" id="t1">興味のある<span class="mark">分野</span>を<br>教えてください</h1>
-
-      <div class="fields">
-        <button class="card field rise" style="--i:2" type="button" data-field="wd">
-          <span class="ic"><img src="../assets/field-wd.png" alt=""></span>
-          <span class="txt">
-            <span class="name">Webデザイン</span>
-            <span class="desc">バナーやWebサイトをつくる</span>
-          </span>
-          <span class="go">
-            <svg class="ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
-            <svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
-          </span>
-        </button>
-        <button class="card field rise" style="--i:3" type="button" data-field="ve">
-          <span class="ic"><img src="../assets/field-ve.png" alt=""></span>
-          <span class="txt">
-            <span class="name">動画編集</span>
-            <span class="desc">YouTube・SNS動画をつくる</span>
-          </span>
-          <span class="go">
-            <svg class="ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
-            <svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
-          </span>
-        </button>
-      </div>
-      <p class="note rise" style="--i:4">どちらも<b>完全無料</b>・オンラインで参加できます</p>
-    </section>
-
-    <!-- ========== STEP2：年代 ========== -->
-    <section class="panel" id="step-age" aria-labelledby="t2">
-      <div class="chosen-row rise" style="--i:0">
-        <button class="chosen" type="button" id="change"><span class="dot"></span><span id="chosenName"></span><span class="chg">変更</span></button>
-      </div>
-      <h1 class="title rise" style="--i:1" id="t2"><span class="mark">年代</span>を教えてください</h1>
-
-      <div class="ages">
-        <button class="card age rise" style="--i:2" type="button" data-age="20">
-          <span class="floaty" style="display:block">
-            <span class="av" style="display:block"><img src="../assets/age-20.png" alt="">
-              <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-            </span>
-          </span>
-          <span class="lb">20代</span>
-        </button>
-        <button class="card age rise" style="--i:3" type="button" data-age="30">
-          <span class="floaty" style="display:block">
-            <span class="av" style="display:block"><img src="../assets/age-30.png" alt="">
-              <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-            </span>
-          </span>
-          <span class="lb">30代</span>
-        </button>
-        <button class="card age rise" style="--i:4" type="button" data-age="40">
-          <span class="floaty" style="display:block">
-            <span class="av" style="display:block"><img src="../assets/age-40.png" alt="">
-              <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-            </span>
-          </span>
-          <span class="lb">40代<small>以上</small></span>
-        </button>
-      </div>
-      <p class="note rise" style="--i:5">年代に合わせた内容のイベントをご案内します</p>
-    </section>
-  </div>
-</main>
-
-<!-- マッチング演出 -->
-<div class="match" id="match" aria-live="polite">
-  <div class="box">
-    <div class="ring">
-      <svg viewBox="0 0 100 100" fill="none">
-        <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff7a2e"/><stop offset="1" stop-color="#5fa2ff"/></linearGradient></defs>
-        <circle cx="50" cy="50" r="45" stroke="rgba(19,35,61,.08)" stroke-width="6"/>
-        <circle class="arc" cx="50" cy="50" r="45" stroke="url(#rg)" stroke-width="6" stroke-linecap="round" transform="rotate(-90 50 50)"/>
-        <path class="ck" d="M32 51l12 12 24-26" stroke="url(#rg)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <h1 id="t1">どっちが<br><span class="u">気になる？<svg viewBox="0 0 100 12" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M2 8c14-4 30-5 48-3s34 2 48-2" stroke="#DFA882" stroke-width="4" stroke-linecap="round"/></svg></span></h1>
+      <p>あなたに合う無料イベントをご案内します。</p>
     </div>
-    <p class="h">あなたにぴったりの<br>無料イベントが見つかりました！</p>
-    <span class="tag" id="matchTag"></span>
-    <p class="s">ページを移動しています…</p>
-  </div>
-</div>
-<div class="confetti" id="confetti" aria-hidden="true"></div>
+
+    <div class="fields">
+      <button class="opt" type="button" data-field="wd">
+        <span class="thumb" aria-hidden="true">
+          <span class="tape"></span>
+          <span class="clip"><span class="site"><span class="bar"><i></i><i></i><i></i></span><span class="hero"></span><span class="cols"><i></i><i></i><i></i></span></span></span>
+        </span>
+        <span class="t"><b>Webデザイン</b><span>バナーやサイトをつくる</span></span>
+        <span class="arrow" aria-hidden="true">
+          <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          <svg class="ck" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg>
+        </span>
+      </button>
+
+      <button class="opt" type="button" data-field="ve">
+        <span class="thumb" aria-hidden="true">
+          <span class="clip"><span class="edit"><span class="pv"></span><span class="tl"><i></i><i></i><i></i></span><span class="ph"></span></span></span>
+        </span>
+        <span class="t"><b>動画編集</b><span>YouTube・SNS動画を編集</span></span>
+        <span class="arrow" aria-hidden="true">
+          <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          <svg class="ck" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg>
+        </span>
+      </button>
+    </div>
+
+    <p class="foot"><span class="dot"></span>オンライン参加・スマホからでもOK</p>
+  </section>
+
+  <!-- ========== STEP2：年代 ========== -->
+  <section class="panel" id="step-age" aria-labelledby="t2">
+    <div class="picked">選んだ分野：<b id="chosenName"></b><button type="button" id="change">変更する</button></div>
+    <div class="head">
+      <h1 id="t2">年代を<br><span class="u">教えてね<svg viewBox="0 0 100 12" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M2 7c16-3 32-4 50-2s32 3 46-1" stroke="#DFA882" stroke-width="4" stroke-linecap="round"/></svg></span></h1>
+      <p>年代ごとに、内容を合わせた回を用意しています。</p>
+    </div>
+
+    <div class="ages">
+      <button class="opt age" type="button" data-age="20">
+        <img src="../assets/age-20.png" alt="">
+        <span class="t"><b>20代</b><span>はじめての副業・転職に</span></span>
+        <span class="arrow" aria-hidden="true">
+          <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          <svg class="ck" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg>
+        </span>
+      </button>
+      <button class="opt age" type="button" data-age="30">
+        <img src="../assets/age-30.png" alt="">
+        <span class="t"><b>30代</b><span>家事・育児と両立したい</span></span>
+        <span class="arrow" aria-hidden="true">
+          <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          <svg class="ck" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg>
+        </span>
+      </button>
+      <button class="opt age" type="button" data-age="40">
+        <img src="../assets/age-40.png" alt="">
+        <span class="t"><b>40代<small>以上</small></b><span>これからの働き方を考えたい</span></span>
+        <span class="arrow" aria-hidden="true">
+          <svg class="ar" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          <svg class="ck" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg>
+        </span>
+      </button>
+    </div>
+  </section>
+</main>
 
 <script>
 (function () {
@@ -377,14 +248,9 @@
     }
   };
   var FIELD = { wd: "Webデザイン", ve: "動画編集" };
-  var AGE = { 20: "20代", 30: "30代", 40: "40代以上" };
-
-  // 演出の長さ（ms）。遷移を速くしたい場合はここを短くする
-  var SELECT_DELAY = 320;   // 分野カードを押してからSTEP2へ
-  var MATCH_DELAY = 1300;   // マッチング演出を見せてからLPへ
+  var SELECT_DELAY = 220;  // 選択の反応を見せてから次へ進むまで（ms）
 
   var field = null, current = null, busy = false;
-  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // このページの ?以降 をLPへ引き継ぐ（同名キーはこのページの値を優先）
   function buildUrl(base) {
@@ -397,92 +263,64 @@
 
   function show(id, dir) {
     document.querySelectorAll(".panel").forEach(function (p) {
-      var on = p.id === id;
       p.classList.remove("show", "in-right", "in-left");
-      if (on) { void p.offsetWidth; p.classList.add("show", dir === "back" ? "in-left" : "in-right"); }
+      if (p.id === id) { void p.offsetWidth; p.classList.add("show", dir === "back" ? "in-left" : "in-right"); }
     });
-    document.querySelectorAll(".card").forEach(function (c) { c.classList.remove("selected", "dim"); });
+    document.querySelectorAll(".opt").forEach(function (o) { o.classList.remove("selected"); });
     window.scrollTo(0, 0);
   }
 
-  function setProgress(n) {
-    document.getElementById("stepNum").textContent = n;
-    document.getElementById("fill").style.width = n === 1 ? "35%" : n === 2 ? "72%" : "100%";
+  function setQ(n) {
+    document.getElementById("qnum").textContent = "Q" + n + " / 2";
+    document.getElementById("bar2").classList.toggle("on", n === 2);
   }
 
-  // 分野はハッシュ（#wd / #ve）で保持：?以降を保ったまま、ブラウザの「戻る」でSTEP1へ戻れる
+  // 分野はハッシュ（#wd / #ve）で保持：?以降を保ったまま、ブラウザの「戻る」でQ1へ戻れる
   function render() {
     busy = false;
-    document.getElementById("match").classList.remove("on");
     var h = window.location.hash.replace("#", "");
     if (h === "wd" || h === "ve") {
       field = h;
       document.getElementById("chosenName").textContent = FIELD[h];
       show("step-age", current === "step-field" ? "fwd" : "back");
-      current = "step-age"; setProgress(2);
+      current = "step-age"; setQ(2);
     } else {
       field = null;
       show("step-field", current === "step-age" ? "back" : "fwd");
-      current = "step-field"; setProgress(1);
+      current = "step-field"; setQ(1);
     }
-  }
-
-  function ripple(btn, e) {
-    var r = btn.getBoundingClientRect(), size = Math.max(r.width, r.height) * 1.6;
-    var x = (e.clientX || r.left + r.width / 2) - r.left - size / 2;
-    var y = (e.clientY || r.top + r.height / 2) - r.top - size / 2;
-    var s = document.createElement("span");
-    s.className = "ripple"; s.style.cssText = "width:" + size + "px;height:" + size + "px;left:" + x + "px;top:" + y + "px";
-    btn.appendChild(s); setTimeout(function () { s.remove(); }, 650);
-  }
-
-  function select(btn, group) {
-    document.querySelectorAll(group).forEach(function (c) { c.classList.toggle("selected", c === btn); c.classList.toggle("dim", c !== btn); });
-    if (navigator.vibrate) { try { navigator.vibrate(12); } catch (e) {} }
-  }
-
-  function confetti() {
-    var box = document.getElementById("confetti"), colors = ["#ff7a2e", "#ffa66b", "#5fa2ff", "#9cc8ff", "#ffd36b"];
-    box.innerHTML = "";
-    for (var i = 0; i < 36; i++) {
-      var p = document.createElement("i"), a = Math.random() * Math.PI * 2, d = 120 + Math.random() * 160;
-      p.style.background = colors[i % colors.length];
-      p.style.setProperty("--x", Math.cos(a) * d + "px");
-      p.style.setProperty("--y", Math.sin(a) * d - 60 + "px");
-      p.style.setProperty("--r", (Math.random() * 720 - 360) + "deg");
-      p.style.animationDelay = (Math.random() * 120) + "ms";
-      box.appendChild(p);
-    }
-    setTimeout(function () { box.innerHTML = ""; }, 1400);
   }
 
   document.querySelectorAll("[data-field]").forEach(function (btn) {
-    btn.addEventListener("click", function (e) {
+    btn.addEventListener("click", function () {
       if (busy) return; busy = true;
-      ripple(btn, e); select(btn, "[data-field]");
-      setTimeout(function () { window.location.hash = btn.dataset.field; }, reduce ? 0 : SELECT_DELAY);
+      btn.classList.add("selected");
+      setTimeout(function () { window.location.hash = btn.dataset.field; }, SELECT_DELAY);
     });
   });
 
   document.querySelectorAll("[data-age]").forEach(function (btn) {
-    btn.addEventListener("click", function (e) {
+    var sub = btn.querySelector(".t span"), original = sub.textContent;
+    btn.addEventListener("click", function () {
       if (busy || !field) return; busy = true;
       var age = btn.dataset.age, dest = buildUrl(LP[field][age]);
-      ripple(btn, e); select(btn, "[data-age]"); setProgress(3);
+      btn.classList.add("selected");
+      sub.textContent = "ご案内ページへ移動しています…";
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: "cushion_select", cushion_field: field, cushion_age: age, cushion_dest: dest, cushion_ver: "v2" });
-      document.getElementById("matchTag").textContent = FIELD[field] + " × " + AGE[age] + "向け";
-      setTimeout(function () {
-        document.getElementById("match").classList.add("on");
-        if (!reduce) setTimeout(confetti, 550);
-      }, 250);
-      setTimeout(function () { window.location.href = dest; }, reduce ? 300 : MATCH_DELAY);
+      setTimeout(function () { window.location.href = dest; }, SELECT_DELAY);
     });
+    btn.dataset.sub = original;
   });
 
   document.getElementById("change").addEventListener("click", function () { window.location.hash = ""; });
   window.addEventListener("hashchange", render);
-  window.addEventListener("pageshow", function (e) { if (e.persisted) { current = null; render(); } });
+  // LPから「戻る」で帰ってきたとき（bfcache）に、選択中の表示を元に戻す
+  window.addEventListener("pageshow", function (e) {
+    if (!e.persisted) return;
+    document.querySelectorAll("[data-age]").forEach(function (b) { b.querySelector(".t span").textContent = b.dataset.sub; });
+    current = null; render();
+  });
   render();
 })();
 </script>
