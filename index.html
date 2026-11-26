@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>無料イベントのご案内｜HerTech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #ff8a3d;
+    --orange-soft: #ffe3cf;
+    --blue: #2f80ff;
+    --blue-soft: #d6e8ff;
+    --navy: #14213d;
+    --gray: #8a94a6;
+    --line: #d9dee8;
+    --card: rgba(255, 255, 255, 0.92);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+    color: var(--navy);
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  /* 背景のやわらかいグラデーション */
+  .bg {
+    position: fixed; inset: 0; z-index: -1; overflow: hidden;
+    background: #fff;
+  }
+  .bg span { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .75; }
+  .bg .b1 { width: 70vmax; height: 70vmax; right: -30vmax; top: -35vmax; background: #ffb98a; }
+  .bg .b2 { width: 60vmax; height: 60vmax; left: -30vmax; top: -25vmax; background: #b9dbff; }
+  .bg .b3 { width: 60vmax; height: 60vmax; left: -28vmax; bottom: -32vmax; background: #9fcfff; }
+  .bg .b4 { width: 60vmax; height: 60vmax; right: -30vmax; bottom: -30vmax; background: #ffc9a3; }
+
+  .wrap {
+    max-width: 480px; margin: 0 auto; min-height: 100%;
+    padding: 40px 20px calc(40px + env(safe-area-inset-bottom));
+  }
+
+  /* ステップインジケーター */
+  .steps { display: flex; justify-content: space-between; position: relative; margin: 0 8px 36px; }
+  .steps::before {
+    content: ""; position: absolute; top: 19px; left: 16.6%; right: 16.6%;
+    height: 4px; background: var(--line); border-radius: 2px;
+  }
+  .steps .progress {
+    position: absolute; top: 19px; left: 16.6%; height: 4px; width: 0;
+    background: var(--orange); border-radius: 2px; transition: width .35s ease;
+  }
+  .step { position: relative; z-index: 1; width: 33.3%; text-align: center; }
+  .step .dot {
+    width: 42px; height: 42px; margin: 0 auto 8px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 18px;
+    background: #fff; color: #b4bccb; border: 2px solid var(--line);
+    transition: all .25s ease;
+  }
+  .step .label { font-size: 12px; font-weight: 700; color: var(--gray); white-space: nowrap; }
+  .step.active .dot { background: var(--orange); color: #fff; border-color: var(--orange); box-shadow: 0 6px 16px rgba(255,138,61,.35); }
+  .step.active .label { color: var(--orange); }
+  .step.done .dot { background: var(--orange); color: #fff; border-color: var(--orange); }
+  .step.done .dot .num { display: none; }
+  .step .dot .check { display: none; width: 18px; height: 18px; }
+  .step.done .dot .check { display: block; }
+
+  /* 見出し */
+  .title {
+    position: relative; text-align: center;
+    font-size: 26px; font-weight: 900; line-height: 1.45; letter-spacing: .02em;
+    margin-bottom: 28px; padding: 0 28px;
+  }
+  .title::before, .title::after {
+    content: ""; position: absolute; top: 50%; width: 24px; height: 28px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 28' fill='none' stroke='%23ff8a3d' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M9 3l3 8M2 11l7 5M3 23l8-2'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+  .title::before { left: 0; transform: translateY(-75%); }
+  .title::after { right: 0; transform: translateY(-75%) scaleX(-1); }
+  .lead { text-align: center; font-size: 13px; color: var(--gray); margin: -16px 0 24px; font-weight: 500; }
+
+  /* 選択カード */
+  .panel { display: none; animation: fade .35s ease; }
+  .panel.show { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  .options { display: flex; flex-direction: column; gap: 16px; }
+  .option {
+    display: flex; align-items: center; gap: 18px; width: 100%;
+    padding: 18px 20px; border-radius: 24px;
+    background: var(--card); border: 1.5px solid #f0e3da;
+    box-shadow: 0 10px 28px rgba(20, 33, 61, .08);
+    font: inherit; color: inherit; text-align: left; cursor: pointer;
+    transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .option:hover { border-color: var(--orange); box-shadow: 0 12px 30px rgba(255,138,61,.18); }
+  .option:active { transform: scale(.98); }
+  .option:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+  .option .icon {
+    flex: none; width: 76px; height: 76px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(145deg, #fff3ea, #eef5ff);
+  }
+  .option .icon svg { width: 46px; height: 46px; }
+  .option .sep { flex: none; width: 1.5px; align-self: stretch; background: var(--line); margin: 6px 0; }
+  .option .name { flex: 1; font-size: 24px; font-weight: 900; letter-spacing: .02em; }
+  .option .chev { flex: none; width: 22px; height: 22px; color: var(--blue); }
+
+  /* 年代カード（少しコンパクト） */
+  #step-age .option { padding: 14px 18px; border-color: var(--line); box-shadow: 0 6px 18px rgba(20,33,61,.06); }
+  #step-age .option .icon { width: 68px; height: 68px; }
+  #step-age .option .icon.c20 { background: linear-gradient(145deg, #ffe6d6, #fff4ec); }
+  #step-age .option .icon.c30 { background: linear-gradient(145deg, #d8eaff, #eef6ff); }
+  #step-age .option .icon.c40 { background: linear-gradient(145deg, #ffe0cc, #fff1e6); }
+  #step-age .option .icon svg { width: 44px; height: 44px; }
+
+  .back {
+    display: block; margin: 24px auto 0; padding: 10px 16px;
+    background: none; border: none; font: inherit; font-size: 14px; font-weight: 700;
+    color: var(--gray); cursor: pointer;
+  }
+  .back:hover { color: var(--navy); }
+  .chosen {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin: 0 auto 20px; padding: 6px 14px; border-radius: 999px;
+    background: var(--orange-soft); color: #c95a12; font-size: 13px; font-weight: 700;
+  }
+  .chosen-wrap { text-align: center; }
+
+  .redirecting { text-align: center; padding-top: 40px; font-weight: 700; color: var(--gray); }
+  .spinner {
+    width: 36px; height: 36px; margin: 0 auto 16px; border-radius: 50%;
+    border: 4px solid var(--blue-soft); border-top-color: var(--blue);
+    animation: spin .8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 360px) {
+    .title { font-size: 22px; }
+    .option .name { font-size: 20px; }
+    .option .icon { width: 64px; height: 64px; }
+  }
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="b3"></span><span class="b4"></span></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="g-ob" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff8a3d"/><stop offset="1" stop-color="#2f80ff"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<main class="wrap">
+  <!-- ステップ表示 -->
+  <div class="steps" aria-hidden="true">
+    <div class="progress" id="progress"></div>
+    <div class="step" data-step="1">
+      <div class="dot"><span class="num">1</span>
+        <svg class="check" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+      </div>
+      <div class="label">興味分野の選択</div>
+    </div>
+    <div class="step" data-step="2">
+      <div class="dot"><span class="num">2</span>
+        <svg class="check" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+      </div>
+      <div class="label">年代の選択</div>
+    </div>
+    <div class="step" data-step="3">
+      <div class="dot"><span class="num">3</span>
+        <svg class="check" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+      </div>
+      <div class="label">おすすめのご案内</div>
+    </div>
+  </div>
+
+  <!-- STEP1：興味分野 -->
+  <section class="panel" id="step-field" aria-labelledby="t1">
+    <h1 class="title" id="t1">興味のある分野を<br>教えてください</h1>
+    <div class="options">
+      <button class="option" type="button" data-field="wd">
+        <span class="icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="url(#g-ob)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="8" y="10" width="32" height="22" rx="2.5"/>
+            <path d="M4 38h40l-3-6H7z"/>
+            <path d="M31 13l-8 9" />
+            <path d="M23 22c-2 0-4 1.5-4 4 2 0 4-1 4-4z" fill="url(#g-ob)"/>
+          </svg>
+        </span>
+        <span class="sep"></span>
+        <span class="name">Webデザイン</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+      <button class="option" type="button" data-field="ve">
+        <span class="icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="url(#g-ob)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="9" width="36" height="30" rx="3"/>
+            <path d="M6 16h36M6 32h36M12 9v7M19 9v7M26 9v7M33 9v7M12 32v7M19 32v7M26 32v7M33 32v7"/>
+            <path d="M21 20.5v7l6-3.5z" fill="url(#g-ob)"/>
+          </svg>
+        </span>
+        <span class="sep"></span>
+        <span class="name">動画編集</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- STEP2：年代 -->
+  <section class="panel" id="step-age" aria-labelledby="t2">
+    <h1 class="title" id="t2">年代を教えてください</h1>
+    <div class="chosen-wrap"><span class="chosen" id="chosen"></span></div>
+    <div class="options">
+      <button class="option" type="button" data-age="20">
+        <span class="icon c20"><svg viewBox="0 0 48 48" fill="none" stroke="#ff8a3d" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="19" r="8"/><circle cx="31" cy="10" r="3.5"/><path d="M10 42c1.5-8 7-12 14-12s12.5 4 14 12"/></svg></span>
+        <span class="name">20代</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+      <button class="option" type="button" data-age="30">
+        <span class="icon c30"><svg viewBox="0 0 48 48" fill="none" stroke="#2f80ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="19" r="8"/><path d="M15 26c-2-6-1-14 9-15 10 1 11 9 9 15"/><path d="M10 42c1.5-8 7-12 14-12s12.5 4 14 12"/></svg></span>
+        <span class="name">30代</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+      <button class="option" type="button" data-age="40">
+        <span class="icon c40"><svg viewBox="0 0 48 48" fill="none" stroke="#e8742a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="19" r="8"/><path d="M15.5 22c-1-7 2-11 8.5-11s9.5 4 8.5 11"/><path d="M10 42c1.5-8 7-12 14-12s12.5 4 14 12"/><path d="M20 31l4 5 4-5"/></svg></span>
+        <span class="name">40代以上</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+    <button class="back" type="button" id="back">← 興味分野を選び直す</button>
+  </section>
+
+  <!-- 遷移中 -->
+  <section class="panel" id="step-go">
+    <div class="redirecting"><div class="spinner"></div>あなたにおすすめのイベントへ移動しています…</div>
+  </section>
+</main>
+
+<script>
+(function () {
+  // 遷移先LP（分野 × 年代）
+  var LP = {
+    wd: {
+      20: "https://lp.her-tech.jp/20wdig-pm",
+      30: "https://lp.her-tech.jp/30wdig-pm",
+      40: "https://lp.her-tech.jp/40wdig-pm"
+    },
+    ve: {
+      20: "https://lp.her-tech.jp/20veig-pm",
+      30: "https://lp.her-tech.jp/30veig-pm",
+      40: "https://lp.her-tech.jp/40veyt-pm"
+    }
+  };
+  var FIELD_LABEL = { wd: "Webデザイン", ve: "動画編集" };
+
+  var state = { field: null };
+
+  // このページに付いているパラメータ（?以降）をLPのURLへ引き継ぐ
+  // LP側にすでにクエリがある場合はマージし、同名キーはこのページ側の値を優先する
+  function buildUrl(base) {
+    var incoming = new URLSearchParams(window.location.search);
+    var url = new URL(base);
+    incoming.forEach(function (value, key) { url.searchParams.delete(key); });
+    incoming.forEach(function (value, key) { url.searchParams.append(key, value); });
+    return url.toString();
+  }
+
+  function setStep(n) {
+    document.querySelectorAll(".step").forEach(function (el) {
+      var s = Number(el.dataset.step);
+      el.classList.toggle("active", s === n);
+      el.classList.toggle("done", s < n);
+    });
+    document.getElementById("progress").style.width = (n <= 1 ? 0 : n === 2 ? 33.4 : 66.8) + "%";
+  }
+
+  function show(id) {
+    document.querySelectorAll(".panel").forEach(function (p) { p.classList.toggle("show", p.id === id); });
+    window.scrollTo(0, 0);
+  }
+
+  function render() {
+    // #age のハッシュでステップ2を表現（ブラウザの「戻る」でステップ1に戻れるように）
+    var h = window.location.hash.replace("#", "");
+    if (h === "wd" || h === "ve") {
+      state.field = h;
+      document.getElementById("chosen").textContent = "✓ " + FIELD_LABEL[h];
+      setStep(2); show("step-age");
+    } else {
+      state.field = null;
+      setStep(1); show("step-field");
+    }
+  }
+
+  document.querySelectorAll("[data-field]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      // ハッシュだけを変えるので ?以降のパラメータはそのまま保持される
+      window.location.hash = btn.dataset.field;
+    });
+  });
+
+  document.querySelectorAll("[data-age]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      if (!state.field) return;
+      var dest = buildUrl(LP[state.field][btn.dataset.age]);
+      // GTM等で計測する場合に拾えるようにイベントを積んでおく
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "cushion_select", cushion_field: state.field, cushion_age: btn.dataset.age, cushion_dest: dest });
+      setStep(3); show("step-go");
+      setTimeout(function () { window.location.href = dest; }, 250);
+    });
+  });
+
+  document.getElementById("back").addEventListener("click", function () { window.location.hash = ""; });
+  window.addEventListener("hashchange", render);
+  // LPから「戻る」で帰ってきたとき（bfcache）に遷移中表示のままにならないように
+  window.addEventListener("pageshow", function (e) { if (e.persisted) render(); });
+
+  render();
+})();
+</script>
+</body>
+</html>
