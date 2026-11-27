@@ -11,22 +11,24 @@
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&family=Zen+Maru+Gothic:wght@500;700;900&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* 色はモック画像からピクセル採取 */
-    --rose: #EE6C6E;        /* STEP1：アクティブ文字・Webデザインの矢印 */
-    --rose-dot: #EF8F8A;    /* STEP1：①の丸 */
-    --rose-spark: #EC9A9B;  /* STEP1：見出し横の線 */
-    --blue: #5BA0D3;        /* 動画編集の矢印 */
-    --navy: #0F2A47;        /* STEP1：文字 */
-    --gray: #6A7F8E;        /* STEP1：QUESTION・未選択ラベル */
-    --gray-dot: #D1DCDF;
-    --line-rose: #F6C6CC;   /* Webデザイン枠 */
-    --line-blue: #C9DDEC;   /* 動画編集枠 */
-    --deep: #CF5A6B;        /* STEP2：アクティブ */
-    --deep-dot: #CD6070;
-    --peach-dot: #E19479;   /* STEP2：完了チェック */
-    --brown: #553D37;       /* STEP2：文字 */
-    --b20: #E6AAB1; --b30: #B5C9DC; --b40: #E8C0AF;   /* STEP2：枠 */
-    --c20: #CE6676; --c30: #84A6C4; --c40: #D68A72;   /* STEP2：矢印 */
+    /* 色はモック画像の見た目の平均色（中央値）から採取 */
+    --rose: #EF7979;        /* STEP1：アクティブ文字 */
+    --rose-dot: #F19D96;    /* STEP1：①の丸 */
+    --blue: #61A6D4;        /* 動画編集の矢印 */
+    --chev-rose: #F27474;   /* Webデザインの矢印 */
+    --navy: #254664;        /* STEP1：文字 */
+    --gray: #7F94A2;        /* STEP1：未選択ラベル */
+    --q1: #7B91A6;          /* STEP1：QUESTION */
+    --gray-dot: #D0DDE1;
+    --line-rose: #F7CDD2;   /* Webデザイン枠 */
+    --line-blue: #CFE2EE;   /* 動画編集枠 */
+    --deep: #CC606F;        /* STEP2：アクティブ文字 */
+    --deep-dot: #CE6671;
+    --peach-dot: #E29C7E;   /* STEP2：完了チェック */
+    --brown: #6C554F;       /* STEP2：文字 */
+    --q2: #69534C;
+    --b20: #E8AFB7; --b30: #C9D4E0; --b40: #EED0C7;   /* STEP2：枠 */
+    --c20: #CC6673; --c30: #87A7C3; --c40: #D38972;   /* STEP2：矢印 */
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { min-height: 100%; }
@@ -60,8 +62,8 @@
   /* ================= QUESTION ラベル ================= */
   .qlabel { text-align: center; margin-bottom: 10px; }
   .qlabel svg { display: block; width: 30px; height: 14px; margin: 0 auto 8px; }
-  .qlabel span { font-family: "Quicksand", sans-serif; font-weight: 700; font-size: 14px; letter-spacing: .32em; padding-left: .32em; color: var(--gray); }
-  #step-age .qlabel span { color: var(--brown); }
+  .qlabel span { font-family: "Quicksand", sans-serif; font-weight: 700; font-size: 14px; letter-spacing: .32em; padding-left: .32em; color: var(--q1); }
+  #step-age .qlabel span { color: var(--q2); }
 
   /* ================= ステップ表示（2段） ================= */
   .steps { position: relative; display: flex; justify-content: center; gap: 0; margin-bottom: 26px; }
@@ -77,13 +79,13 @@
   /* STEP1 */
   #step-field .dot.on { background: var(--rose-dot); }
   #step-field .lb.on { color: var(--rose); }
-  #step-field .bar { background: linear-gradient(90deg, #F3B9B5, #CED7DB); }
+  #step-field .bar { background: linear-gradient(90deg, #F5C3BE, #C4CACF); }
   /* STEP2 */
   #step-age .dot.done { background: var(--peach-dot); }
   #step-age .dot.on { background: var(--deep-dot); }
   #step-age .lb { color: var(--brown); }
   #step-age .lb.on { color: var(--deep); }
-  #step-age .bar { background: #D57F8A; }
+  #step-age .bar { background: #CB616F; }
 
   /* ================= 見出し ================= */
   .title {
@@ -114,10 +116,10 @@
   .field.ve { border-color: var(--line-blue); box-shadow: 0 6px 18px rgba(120,170,215,.10); }
   .field:active, .age:active { transform: scale(.98); }
   .field img { flex: none; width: 98px; height: 98px; object-fit: contain; }
-  .field .sep { flex: none; width: 1.5px; height: 64px; background: #D3DCE0; margin: 0 14px 0 4px; }
+  .field .sep { flex: none; width: 1.5px; height: 64px; background: #D0DBDF; margin: 0 14px 0 4px; }
   .field .name { flex: 1; font-size: 28px; font-weight: 800; color: var(--navy); letter-spacing: .02em; white-space: nowrap; }
   .chev { flex: none; width: 28px; height: 28px; }
-  .chev.rose { color: var(--rose); } .chev.blue { color: var(--blue); }
+  .chev.rose { color: var(--chev-rose); } .chev.blue { color: var(--blue); }
   .chev.c20 { color: var(--c20); } .chev.c30 { color: var(--c30); } .chev.c40 { color: var(--c40); }
 
   .foot { margin-top: 22px; text-align: center; }
@@ -126,7 +128,7 @@
   .foot .ill .tw { position: absolute; top: 24px; width: 18px; height: 18px; }
   .foot .ill .tw.l { left: calc(50% - 150px); }
   .foot .ill .tw.r { right: calc(50% - 150px); }
-  .foot p { font-size: 15px; font-weight: 700; color: #4A5868; letter-spacing: .08em; }
+  .foot p { font-size: 15px; font-weight: 700; color: #617383; letter-spacing: .08em; }
 
   /* ================= STEP2：年代カード ================= */
   .ages { display: grid; gap: 14px; }
@@ -144,10 +146,10 @@
 
   .foot2 { margin-top: 22px; text-align: center; }
   .foot2 .rays { display: block; width: 34px; height: 16px; margin: 0 auto 6px; }
-  .foot2 p { position: relative; display: inline-block; padding: 4px 16px; font-size: 15px; font-weight: 700; color: var(--brown); letter-spacing: .08em; z-index: 0; }
+  .foot2 p { position: relative; display: inline-block; padding: 4px 16px; font-size: 15px; font-weight: 700; color: #624F4A; letter-spacing: .08em; z-index: 0; }
   .foot2 p::before { /* 筆でひいたピンクのマーカー */
     content: ""; position: absolute; inset: 2px -18px 0; z-index: -1; border-radius: 40% 60% 50% 50% / 60% 50% 60% 40%;
-    background: linear-gradient(90deg, rgba(248,200,204,.2), rgba(248,200,204,.85) 15%, rgba(248,200,204,.8) 85%, rgba(248,200,204,.15));
+    background: linear-gradient(90deg, rgba(246,208,210,.2), rgba(246,208,210,.9) 15%, rgba(246,208,210,.85) 85%, rgba(246,208,210,.15));
   }
   .foot2 .wave { margin: 4px auto 0; }
 
@@ -169,11 +171,11 @@
   <svg viewBox="0 0 390 844" preserveAspectRatio="none" fill="none">
     <defs>
       <filter id="wc" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".02" numOctaves="2" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="10"/><feGaussianBlur stdDeviation="3"/></filter>
-      <linearGradient id="gPink" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F8D6D6"/><stop offset="1" stop-color="#FCEBEA"/></linearGradient>
-      <linearGradient id="gPeach" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FCEDE1"/><stop offset="1" stop-color="#FEF6F1"/></linearGradient>
+      <linearGradient id="gPink" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FADFDE"/><stop offset="1" stop-color="#FDF0EF"/></linearGradient>
+      <linearGradient id="gPeach" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FEF6F3"/><stop offset="1" stop-color="#FEF9F7"/></linearGradient>
       <linearGradient id="gBlue" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#C3DAE6"/><stop offset="1" stop-color="#E3EEF4"/></linearGradient>
       <linearGradient id="gPinkB" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#F7D6DB"/><stop offset="1" stop-color="#FCEBEC"/></linearGradient>
-      <linearGradient id="gBlueR" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#DCE8F1"/><stop offset="1" stop-color="#EFF4F8"/></linearGradient>
+      <linearGradient id="gBlueR" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#E8EFF5"/><stop offset="1" stop-color="#F4F7FA"/></linearGradient>
     </defs>
     <g filter="url(#wc)">
       <path d="M-10 -10 H170 C120 30 70 70 40 140 C25 175 10 200 -10 215 Z" fill="url(#gPink)"/>
@@ -186,7 +188,7 @@
       </g>
       <!-- STEP2：左下がピンク、右下が水色 -->
       <g class="bg-p2">
-        <path d="M-10 700 C50 708 95 735 130 775 C150 800 165 828 175 854 H-10 Z" fill="url(#gPinkB)"/>
+        <path d="M-10 700 C50 708 95 735 130 775 C150 800 165 828 175 854 H-10 Z" fill="url(#gPinkB)" opacity=".75"/>
         <path d="M400 690 C370 725 345 765 325 800 C312 822 305 840 300 854 H400 Z" fill="url(#gBlueR)"/>
       </g>
     </g>
@@ -201,7 +203,7 @@
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="spark" viewBox="0 0 28 32"><g fill="none" stroke-width="2.4" stroke-linecap="round"><path d="M14 3l6 12"/><path d="M4 13l14 7"/><path d="M4 26l14-3"/></g></symbol>
   <symbol id="rays" viewBox="0 0 30 14"><g fill="none" stroke-width="2" stroke-linecap="round"><path d="M15 1v8"/><path d="M5 3l4 7"/><path d="M25 3l-4 7"/></g></symbol>
-  <symbol id="twinkle" viewBox="0 0 20 20"><path d="M10 1c.8 5 3.8 8.2 9 9-5.2.8-8.2 4-9 9-.8-5-3.8-8.2-9-9 5.2-.8 8.2-4 9-9z" fill="none" stroke="#E0C3A7" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+  <symbol id="twinkle" viewBox="0 0 20 20"><path d="M10 1c.8 5 3.8 8.2 9 9-5.2.8-8.2 4-9 9-.8-5-3.8-8.2-9-9 5.2-.8 8.2-4 9-9z" fill="none" stroke="#E2C8AF" stroke-width="1.4" stroke-linejoin="round"/></symbol>
   <symbol id="chev" viewBox="0 0 24 24"><path d="M9 4.5l7.5 7.5L9 19.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
@@ -210,7 +212,7 @@
   <!-- ========== STEP1：興味分野 ========== -->
   <section class="panel" id="step-field" aria-labelledby="t1">
     <div class="qlabel" aria-hidden="true">
-      <svg><use href="#rays" stroke="#EC9A9B"/></svg><span>QUESTION</span>
+      <svg><use href="#rays" stroke="#E7B2B8"/></svg><span>QUESTION</span>
     </div>
     <div class="steps" aria-hidden="true">
       <div class="bar"></div>
@@ -219,9 +221,9 @@
     </div>
 
     <h1 class="title" id="t1">
-      <svg class="spark" stroke="#EC9A9B"><use href="#spark"/></svg>
+      <svg class="spark" stroke="#E6A7A5"><use href="#spark"/></svg>
       <span>あなたが興味のある<br>分野はどちらですか？</span>
-      <svg class="spark r" stroke="#EC9A9B"><use href="#spark"/></svg>
+      <svg class="spark r" stroke="#E6A7A5"><use href="#spark"/></svg>
     </h1>
 
     <div class="fields">
@@ -246,14 +248,14 @@
         <svg class="tw r"><use href="#twinkle"/></svg>
       </div>
       <p>あなたに合ったイベントをご案内</p>
-      <svg class="wave" viewBox="0 0 140 12" aria-hidden="true"><path d="M3 9c25-6 50-7 70-5s45 3 64-2" fill="none" stroke="#E79A9C" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <svg class="wave" viewBox="0 0 140 12" aria-hidden="true"><path d="M3 9c25-6 50-7 70-5s45 3 64-2" fill="none" stroke="#E3B0B3" stroke-width="2.2" stroke-linecap="round"/></svg>
     </div>
   </section>
 
   <!-- ========== STEP2：年代 ========== -->
   <section class="panel" id="step-age" aria-labelledby="t2">
     <div class="qlabel" aria-hidden="true">
-      <svg><use href="#rays" stroke="#D06A79"/></svg><span>QUESTION</span>
+      <svg><use href="#rays" stroke="#D06F79"/></svg><span>QUESTION</span>
     </div>
     <div class="steps" aria-hidden="true">
       <div class="bar"></div>
@@ -265,11 +267,11 @@
     </div>
 
     <h1 class="title" id="t2">
-      <svg class="spark" stroke="#C85366"><use href="#spark"/></svg>
+      <svg class="spark" stroke="#CA6371"><use href="#spark"/></svg>
       <span>あなたの年代を<br>教えてください</span>
-      <svg class="spark r" stroke="#C85366"><use href="#spark"/></svg>
+      <svg class="spark r" stroke="#CA6371"><use href="#spark"/></svg>
     </h1>
-    <svg class="wave" viewBox="0 0 140 12" aria-hidden="true"><path d="M3 8c25-6 50-6 70-3s45 4 64-1" fill="none" stroke="#DB8C8C" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <svg class="wave" viewBox="0 0 140 12" aria-hidden="true"><path d="M3 8c25-6 50-6 70-3s45 4 64-1" fill="none" stroke="#E1A09E" stroke-width="2.2" stroke-linecap="round"/></svg>
 
     <div class="ages">
       <button class="age a20" type="button" data-age="20"><span class="name">20代の方</span><svg class="chev c20"><use href="#chev"/></svg></button>
@@ -278,9 +280,9 @@
     </div>
 
     <div class="foot2">
-      <svg class="rays"><use href="#rays" stroke="#C85E6D"/></svg>
+      <svg class="rays"><use href="#rays" stroke="#CB6A76"/></svg>
       <p>あなたに合ったイベントをご案内</p>
-      <svg class="wave" viewBox="0 0 140 12" aria-hidden="true"><path d="M3 9c25-6 50-7 70-5s45 3 64-2" fill="none" stroke="#D4737C" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <svg class="wave" viewBox="0 0 140 12" aria-hidden="true"><path d="M3 9c25-6 50-7 70-5s45 3 64-2" fill="none" stroke="#D8838A" stroke-width="2.2" stroke-linecap="round"/></svg>
     </div>
   </section>
 
