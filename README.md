@@ -4,10 +4,14 @@ IGストーリーのタイアップリンクから流入したユーザーに「
 
 ## 構成
 
-- `index.html` … ページ本体（HTML / CSS / JS を1ファイルに集約）
-- `assets/` … アイコン・イラスト画像
+公開URL：https://event.her-tech.jp/ （GitHub Pages ＋ カスタムドメイン）
 
-ビルド不要の静的ファイルのみ。GitHub Pages で公開。
+- `ig-tieup/index.html` … IGタイアップ用クッションページ本体（HTML / CSS / JS を1ファイルに集約）→ https://event.her-tech.jp/ig-tieup/
+- `ig-tieup/assets/` … アイコン・イラスト画像
+- `index.html` … ルートにアクセスされた場合は https://her-tech.jp/ へ転送
+- `CNAME` … カスタムドメイン設定（event.her-tech.jp）。削除しないこと
+
+ビルド不要の静的ファイルのみ。施策ごとにフォルダを切って追加できる。
 
 ## 遷移先LP
 
@@ -16,13 +20,13 @@ IGストーリーのタイアップリンクから流入したユーザーに「
 | Webデザイン | lp.her-tech.jp/20wdig-pm | lp.her-tech.jp/30wdig-pm | lp.her-tech.jp/40wdig-pm |
 | 動画編集 | lp.her-tech.jp/20veig-pm | lp.her-tech.jp/30veig-pm | lp.her-tech.jp/40veyt-pm |
 
-変更する場合は `index.html` 内の `var LP = { ... }` を編集する。
+変更する場合は `ig-tieup/index.html` 内の `var LP = { ... }` を編集する。
 
 ## パラメータの引き継ぎ
 
 このページのURLに付けた `?` 以降のパラメータは、遷移先LPにそのまま付与される。
 
-例：`https://<ドメイン>/?utm_source=ig&utm_campaign=xxx`
+例：`https://event.her-tech.jp/ig-tieup/?utm_source=ig&utm_campaign=xxx`
 → 動画編集 × 30代を選択 → `https://lp.her-tech.jp/30veig-pm?utm_source=ig&utm_campaign=xxx`
 
 - 同名のキーがLP側URLにある場合は、このページ側の値を優先
