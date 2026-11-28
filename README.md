@@ -1,23 +1,34 @@
-# HerTech IGタイアップ クッションページ（デモ）
+# HerTech クッションページ（IGタイアップ用）
 
-IGストーリーのタイアップリンク → 興味分野を選択 → 年代を選択 → 該当LPへ遷移するクッションページ。
+IGストーリーのタイアップリンクから流入したユーザーに「興味分野」と「年代」を選んでもらい、該当する無料イベントLPへ遷移させるページ。
 
-## 遷移先
+## 構成
+
+- `index.html` … ページ本体（HTML / CSS / JS を1ファイルに集約）
+- `assets/` … アイコン・イラスト画像
+
+ビルド不要の静的ファイルのみ。GitHub Pages で公開。
+
+## 遷移先LP
 
 | 分野 | 20代 | 30代 | 40代以上 |
 |---|---|---|---|
-| Webデザイン | /20wdig-pm | /30wdig-pm | /40wdig-pm |
-| 動画編集 | /20veig-pm | /30veig-pm | /40veyt-pm |
+| Webデザイン | lp.her-tech.jp/20wdig-pm | lp.her-tech.jp/30wdig-pm | lp.her-tech.jp/40wdig-pm |
+| 動画編集 | lp.her-tech.jp/20veig-pm | lp.her-tech.jp/30veig-pm | lp.her-tech.jp/40veyt-pm |
 
-（すべて https://lp.her-tech.jp 配下。`index.html` 内の `LP` オブジェクトで管理）
+変更する場合は `index.html` 内の `var LP = { ... }` を編集する。
 
-## パラメータ引き継ぎ
+## パラメータの引き継ぎ
 
-このページのURLに付けた `?` 以降のパラメータは、遷移先LPにそのまま付与されます。
+このページのURLに付けた `?` 以降のパラメータは、遷移先LPにそのまま付与される。
 
-例：`https://<user>.github.io/hertech-cushion/?utm_source=ig&utm_campaign=xxx`
-→ 動画編集 × 40代を選択 → `https://lp.her-tech.jp/40veyt-pm?utm_source=ig&utm_campaign=xxx`
+例：`https://<ドメイン>/?utm_source=ig&utm_campaign=xxx`
+→ 動画編集 × 30代を選択 → `https://lp.her-tech.jp/30veig-pm?utm_source=ig&utm_campaign=xxx`
 
-- 分野選択はURLのハッシュ（`#wd` / `#ve`）で管理しているため、ステップ間でクエリは消えません
-- ブラウザの「戻る」でステップ1に戻れます
-- 選択時に `dataLayer` へ `cushion_select` イベント（field / age / dest）をpushしています（GTM導入時用）
+- 同名のキーがLP側URLにある場合は、このページ側の値を優先
+- 分野の選択はURLのハッシュ（`#wd` / `#ve`）で保持しているため、ブラウザの「戻る」で1問目に戻れる
+- 選択時に `dataLayer` へ `cushion_select` イベント（field / age / dest）をpushしている（GTM導入時の計測用）
+
+## 更新方法
+
+`main` ブランチにpushすると、1〜2分でGitHub Pagesに反映される。
