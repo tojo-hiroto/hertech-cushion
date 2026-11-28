@@ -171,18 +171,12 @@
   .field.pressed { background: #FFF8F8; }
   .field.ve.pressed { background: #F8FBFE; }
   .age.pressed { background: #FFFDFC; }
-  /* ③ 矢印が「こっち」と小さく動く */
-  .chev { animation: nudge 1.8s ease-in-out infinite; }
-  .field.ve .chev, .age.a30 .chev { animation-delay: .25s; }
-  .age.a40 .chev { animation-delay: .5s; }
-  @keyframes nudge { 0%, 55%, 100% { transform: translateX(0); } 70% { transform: translateX(5px); } 85% { transform: translateX(0); } }
   .field:focus-visible, .age:focus-visible { outline: 3px solid #9CC3E3; outline-offset: 3px; }
 
   @media (hover: hover) {
     .field:hover, .age:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--edge), 0 12px 24px var(--glow); }
-    .field:hover .chev, .age:hover .chev { animation: none; transform: translateX(4px); }
   }
-  @media (prefers-reduced-motion: reduce) { .chev { animation: none; } }
+
   @media (max-width: 360px) {
     #step-field .title { font-size: 21px; }
     #step-age .title { font-size: 23px; }
